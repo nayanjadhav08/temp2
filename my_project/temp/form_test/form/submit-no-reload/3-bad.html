@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Unorthodox Script</title>
+    <script>
+    function funkygo(){
+      // (A) GET FORM DATA
+      let data = new URLSearchParams();
+      data.append("name", document.getElementById("user-name").value);
+      data.append("email", document.getElementById("user-email").value);
+      
+      // (B) NEW SCRIPT TAG
+      var funkeh = document.createElement("script");
+      funkeh.src = "0-dummy.php?" + data.toString();
+      document.head.appendChild(funkeh);
+
+      // (C) PREVENT HTML FORM SUBMIT
+      return false;
+    }
+    </script>
+  </head>
+  <body>
+    <form onsubmit="return funkygo()">
+      Name: <input type="text" id="user-name" required/>
+      Email: <input type="email" id="user-email" required/>
+      <input type="submit" value="Go!"/>
+    </form>
+  </body>
+</html>

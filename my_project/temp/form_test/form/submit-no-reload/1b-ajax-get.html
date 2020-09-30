@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AJAX GET Submit</title>
+    <script>
+    function ajaxgo(){
+      // (A) GET FORM DATA
+      var data = new URLSearchParams();
+      data.append("name", document.getElementById("user-name").value);
+      data.append("email", document.getElementById("user-email").value);
+      
+      // (B) AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "0-dummy.php?" + data.toString());
+      // What to do when server responds
+      xhr.onload = function(){
+        console.log(this.response);
+      };
+      xhr.send();
+
+      // (C) PREVENT HTML FORM SUBMIT
+      return false;
+    }
+    </script>
+  </head>
+  <body>
+    <form onsubmit="return ajaxgo()">
+      Name: <input type="text" id="user-name" required/>
+      Email: <input type="email" id="user-email" required/>
+      <input type="submit" value="Go!"/>
+    </form>
+  </body>
+</html>

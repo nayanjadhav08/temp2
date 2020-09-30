@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fetch POST Submit</title>
+    <script>
+    function fetchgo(){
+      // (A) GET FORM DATA
+      let data = new URLSearchParams();
+      data.append("name", document.getElementById("user-name").value);
+      data.append("email", document.getElementById("user-email").value);
+
+      // (B) FETCH
+      fetch("0-dummy.php", {
+        method: 'post',
+        body: data
+      })
+      .then(function (response) {
+        return response.text();
+      })
+      .then(function (text) {
+        console.log(text);
+      })
+      .catch(function (error) {
+        console.log(error)
+      });
+      
+      // (C) PREVENT HTML FORM SUBMIT
+      return false;
+    }
+    </script>
+  </head>
+  <body>
+    <form onsubmit="return fetchgo()">
+      Name: <input type="text" id="user-name" required/>
+      Email: <input type="email" id="user-email" required/>
+      <input type="submit" value="Go!"/>
+    </form>
+  </body>
+</html>
